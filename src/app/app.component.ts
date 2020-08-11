@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {Model, ToDoItem} from './model'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,5 +7,24 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title =" To Do App ";
-  user = "Ezgi";
+  model = new Model();
+  isDisplay = false;
+
+  getName(){
+    return this.model.user;
+  }
+
+  getItems(){
+    if(this.isDisplay){
+      return this.model.items;
+    }
+    return this.model.items.filter(item => !item.action);
+  }
+
+  addItem(value){
+    if(value != ""){
+      this.model.items.push(new ToDoItem(value,false));
+    }
+  }
+
 }
